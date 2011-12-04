@@ -88,5 +88,6 @@ class Analytics(object):
             'cookie': self.cookie_value,
             'is_static': parse_result.path.startswith(static_url_path),
             'blueprint': request.blueprint,
+            'view_args': request.view_args,
         }
         self.analytics_callback(analytics)
