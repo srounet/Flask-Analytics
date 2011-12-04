@@ -2,6 +2,7 @@ from __future__ import absolute_import
 
 from datetime import datetime, timedelta
 from hashlib import sha1
+from urlparse import urlparse
 from uuid import uuid4
 import hmac
 
@@ -77,11 +78,14 @@ class Analytics(object):
         response.set_cookie(name, data, expires=expires, domain=domain)
 
     def track_request(self, request):
+        parse_result = urlparse(request.url)
+        static_url_path = current_app.static_url_path
         analytics = {
             'args': request.args,
             'charset': request.url_charset,
             'url': request.url,
             'user_agent': request.user_agent,
             'cookie': self.cookie_value,
+            'is_static': parse_result.path.startswith(static_url_path),
         }
         self.analytics_callback(analytics)
