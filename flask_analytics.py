@@ -89,5 +89,6 @@ class Analytics(object):
             'is_static': parse_result.path.startswith(static_url_path),
             'blueprint': request.blueprint,
             'view_args': request.view_args,
+            'remote_addr': request.remote_addr,
         }
         self.analytics_callback(analytics)
