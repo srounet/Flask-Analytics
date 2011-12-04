@@ -87,5 +87,6 @@ class Analytics(object):
             'user_agent': request.user_agent,
             'cookie': self.cookie_value,
             'is_static': parse_result.path.startswith(static_url_path),
+            'blueprint': request.blueprint,
         }
         self.analytics_callback(analytics)
